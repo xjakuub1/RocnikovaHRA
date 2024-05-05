@@ -22,5 +22,17 @@ namespace RocnikovaHRA
         {
             Console.ForegroundColor = ConsoleColor.Red;
         }
+
+        public void DarkCyan()
+        {
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+        }
+
+        public void Pokracuj()
+        {
+            Reset();
+            Console.WriteLine("\nZmáčkni jakékoliv tlačítko pro pokračování");
+            Console.ReadKey(true);
+        }
     }
 }

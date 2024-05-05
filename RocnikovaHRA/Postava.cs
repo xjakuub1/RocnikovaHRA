@@ -11,6 +11,7 @@ namespace RocnikovaHRA
     {
         public string name = "Jmeno";
         public string zbran = "";
+        public string specialniItem = "";
         public int sila;
 
         PraceSeSouborem soubor = new PraceSeSouborem();
@@ -64,7 +65,8 @@ namespace RocnikovaHRA
                 string[] jmena = soubor.NacteniVet("randomjmena");
                 int randomCislo = random.Next(0, jmena.Length);
                 name = jmena[randomCislo];
-            } else
+            }
+            else
             {
                 Console.Clear();
                 Console.WriteLine("Zadejte prosím čislo 1 nebo 2");
@@ -92,7 +94,9 @@ namespace RocnikovaHRA
                     konzole.Red();
                     Console.WriteLine("Dostal si podel, máš sílu jen 15. romálů");
                     break;
-
+                default:
+                    sila = 10;
+                    break;
             }
 
             /*if (zbran == "Kosa")

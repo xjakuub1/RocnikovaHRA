@@ -68,5 +68,84 @@ namespace RocnikovaHRA
             }
             return zbran;
         }
+
+        public int Pub()
+        {
+            int choice;
+
+            Console.Clear();
+            konzole.Kurator();
+            Console.WriteLine("Kurátor: Jelikož ses probudil z neznámého delíria, rozhodl ses, že zajdeš do hostince, který je hned vedle tebe");
+            konzole.Pokracuj();
+
+            Console.Clear();
+            konzole.Kurator();
+            Console.WriteLine("Kurátor: Vešel si do dveří a narazil do tebe nějaký pardál.");
+            konzole.DarkCyan();
+            Console.WriteLine("Pardál: Máš nějakéj problém ty močále?");
+            konzole.Kurator();
+            Console.WriteLine("Kurátor: Teď máš na výběr:");
+            konzole.Reset();
+            Console.WriteLine("1) Vyzvat ho k boji \n2) Omluvit se a pokračovat do hostince");
+            choice = Parsovani(1, 2);
+
+            return choice;
+        }
+
+        public void PubBezKonfrontace()
+        {
+            Console.Clear();
+            konzole.Kurator();
+            Console.WriteLine("Ty: Neˇ, promiň že jsem se tě dotkl");
+            konzole.DarkCyan();
+            Console.WriteLine("Pardál: Tak si dávej příště sakra velkej pozor");
+            konzole.Kurator();
+            Console.WriteLine("Kurátor: Pardál te pustil a nic se nestalo");
+            konzole.Reset();
+        }
+
+        public string PubBitka()
+        {
+            int choice;
+            string specialniItem = "";
+
+            Console.Clear();
+            konzole.Kurator();
+            Console.WriteLine("Ty: Jo mám, pojď ven ty smraďochu.");
+            konzole.DarkCyan();
+            Console.WriteLine("Pardál: Tak teď si mě vážně naštval");
+            konzole.Kurator();
+            Console.WriteLine("Kurátor: Pardál ti chce vypálit bombu, můžeš zkusit uhnout nebo tu ránu sníst");
+            konzole.Reset();
+            Console.WriteLine("1) Zkusit uhnout \n2) Sníst ránu");
+            choice = Parsovani(1, 2);
+            if (choice == 1)
+            {
+                Random random = new Random();
+                int randomCislo = random.Next(1, 5);
+                if (randomCislo <= 3)
+                {
+                    Console.Clear();
+                    konzole.Kurator();
+                    Console.WriteLine("Uhl si úspěšně a vypálil pardálovi hák, který ho poslal spát do hájenky hned vedle");
+                    Console.WriteLine("Kurátor: Rozhodl ses prohledat ho a našel si u něj kříšťálovéj kámen.");
+                    specialniItem = "Kamen";
+                }
+                else
+                {
+                    Console.Clear();
+                    konzole.Red();
+                    Console.WriteLine("Zkusil si no, teď ležíš s mokrou hubou vedle hospody.");
+                    PubBitka();
+                }
+            } else
+            {
+                Console.Clear();
+                konzole.Red();
+                Console.WriteLine("Bohužel, jeho ruka není chléb. Zkus to znova");
+                PubBitka();
+            }
+            return specialniItem;
+        }
     }
 }

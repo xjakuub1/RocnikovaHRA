@@ -67,18 +67,34 @@ namespace RocnikovaHRA
             return score;
         }
 
+        public int ZapisBodu(string NazevSouboru, int score, string jmeno, string zbran, string specialniItem)
+        {
+            string zapisScore = score.ToString();
+            using (StreamWriter sw = new StreamWriter(@"progress.txt"))
+            {
+                sw.WriteLine(zapisScore);
+                sw.WriteLine(jmeno);
+                sw.WriteLine(zbran);
+                sw.WriteLine(specialniItem);
+                sw.Flush();
+            }
+
+            return score;
+        }
+
         public class GameProgress
         {
             public int Score { get; set; }
             public string Jmeno { get; set; }
             public string Zbran { get; set; }
+            public string SpecialniItem { get; set; }
         }
 
         public GameProgress NacteniHry(string NazevSouboru)
         {
             GameProgress progress = new GameProgress();
 
-            string[] NactenyProgres = new string[3];
+            string[] NactenyProgres = new string[4];
             int i = 0;
 
             using (StreamReader sr = new StreamReader(@NazevSouboru))
@@ -94,6 +110,7 @@ namespace RocnikovaHRA
                     progress.Score = score;
                     progress.Jmeno = NactenyProgres[1];
                     progress.Zbran = NactenyProgres[2];
+                    progress.SpecialniItem = NactenyProgres[3];
                     i++;
                 }
 
