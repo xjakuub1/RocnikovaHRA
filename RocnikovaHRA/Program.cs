@@ -42,7 +42,7 @@ namespace RocnikovaHRA
                         int cesta = svet.Pub();
                         if (cesta == 1) 
                         {
-                            postava.specialniItem = svet.PubBitka();
+                            postava.specialniItem = svet.PubBitka(postava.zbran);
                             soubor.ZapisBodu("progress.txt", 30, postava.name, postava.zbran, postava.specialniItem);
                         } else if (cesta == 2)
                         {
@@ -60,14 +60,44 @@ namespace RocnikovaHRA
                         int score = gameProgress.Score;
                         string jmeno = gameProgress.Jmeno;
                         string zbran = gameProgress.Zbran;
+                        string specialItem = gameProgress.SpecialniItem;
 
                         if (gameProgress.Score == 10)
                         {
-                            Console.WriteLine(postava.name);
+                            svet.Intro(jmeno);
+                            postava.zbran = svet.vyberZbrane();
+                            soubor.ZapisBodu("progress.txt", 20, jmeno, zbran);
+                            postava.Sila(zbran);
+                            konzole.Pokracuj();
+                            int cesta1 = svet.Pub();
+                            if (cesta1 == 1)
+                            {
+                                postava.specialniItem = svet.PubBitka(zbran);
+                                soubor.ZapisBodu("progress.txt", 30, jmeno, zbran, postava.specialniItem);
+                            }
+                            else if (cesta1 == 2)
+                            {
+                                postava.specialniItem = "Nic";
+                                svet.PubBezKonfrontace();
+                                soubor.ZapisBodu("progress.txt", 30, jmeno, zbran, postava.specialniItem);
+                            }
                         }
                         else if (gameProgress.Score == 20)
                         {
-                            Console.WriteLine(postava.name + postava.zbran);
+                            postava.Sila(zbran);
+                            konzole.Pokracuj();
+                            int cesta2 = svet.Pub();
+                            if (cesta2 == 1)
+                            {
+                                postava.specialniItem = svet.PubBitka(zbran);
+                                soubor.ZapisBodu("progress.txt", 30, jmeno, zbran, postava.specialniItem);
+                            }
+                            else if (cesta2 == 2)
+                            {
+                                postava.specialniItem = "Nic";
+                                svet.PubBezKonfrontace();
+                                soubor.ZapisBodu("progress.txt", 30, jmeno, zbran, postava.specialniItem);
+                            }
                         }
                         break;
                 }

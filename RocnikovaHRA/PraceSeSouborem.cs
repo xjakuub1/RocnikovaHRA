@@ -28,17 +28,6 @@ namespace RocnikovaHRA
             return NacteneJmena;
         }
 
-        public int ZapisBodu(string NazevSouboru, int score)
-        {
-            string zapisScore = score.ToString();
-            using (StreamWriter sw = new StreamWriter(@"progress.txt"))
-            {
-                sw.WriteLine(zapisScore);
-                sw.Flush();
-            }
-
-            return score;
-        }
 
         public int ZapisBodu(string NazevSouboru, int score, string jmeno)
         {

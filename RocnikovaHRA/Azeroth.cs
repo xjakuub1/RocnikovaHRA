@@ -104,10 +104,13 @@ namespace RocnikovaHRA
             konzole.Reset();
         }
 
-        public string PubBitka()
+        public string PubBitka(string zbran)
         {
+            Random random = new Random();
             int choice;
             string specialniItem = "";
+            int randomCislo;
+            
 
             Console.Clear();
             konzole.Kurator();
@@ -121,29 +124,86 @@ namespace RocnikovaHRA
             choice = Parsovani(1, 2);
             if (choice == 1)
             {
-                Random random = new Random();
-                int randomCislo = random.Next(1, 5);
-                if (randomCislo <= 3)
+                if (zbran == "Kosa")
                 {
-                    Console.Clear();
-                    konzole.Kurator();
-                    Console.WriteLine("Uhl si úspěšně a vypálil pardálovi hák, který ho poslal spát do hájenky hned vedle");
-                    Console.WriteLine("Kurátor: Rozhodl ses prohledat ho a našel si u něj kříšťálovéj kámen.");
-                    specialniItem = "Kamen";
-                }
-                else
+                    randomCislo = random.Next(1, 4);
+                    if (randomCislo <= 3)
+                    {
+                        Console.Clear();
+                        konzole.Kurator();
+                        Console.WriteLine("Uhl si úspěšně a rozpáral si ho na kusy, které si vyhodil do kadiboudy");
+                        Console.WriteLine("Kurátor: Když si ho porcoval, vypadl z něj kříšťálovéj kámen, tak sis ho vzal.");
+                        specialniItem = "Kamen";
+                    }
+                    else
+                    {
+                        konzole.Red();
+                        Console.WriteLine("Zkusil si no, teď ležíš s mokrou hubou vedle hospody.");
+                        PubBitka(zbran);
+                    }
+                } else if (zbran == "Dyka")
+                {
+                    randomCislo = random.Next(1, 5);
+                    if (randomCislo <= 3)
+                    {
+                        konzole.Kurator();
+                        Console.WriteLine("Uhl si úspěšně a pobodal si ho 43x");
+                        Console.WriteLine("Kurátor: Rozhodl ses prohledat ho a našel si u něj krvavej kříšťálovéj kámen, který sis ponechal.");
+                        specialniItem = "Kamen";
+                    }
+                    else
+                    {
+                        konzole.Red();
+                        Console.WriteLine("Zkusil si no, teď ležíš s mokrou hubou vedle hospody.");
+                        PubBitka(zbran);
+                    }
+                } else if (zbran == "Mec")
+                {
+                    randomCislo = random.Next(1, 6);
+                    int missCount = 0;
+                    bool pokracovani = false;
+
+                    while(missCount < 3 && !pokracovani)
+                    {
+                        if (randomCislo <= 3)
+                        {
+                            Console.Clear();
+                            konzole.Kurator();
+                            Console.WriteLine("Uhl si úspěšně a setnul si mu hlavu");
+                            Console.WriteLine("Kurátor: Když si mu setnul hlavu, řetízek s kříšťálovým kamenem spadl a vzal sis ho.");
+                            specialniItem = "Kamen";
+                            pokracovani = true;
+                        }
+                        else
+                        {
+                            missCount++;
+                            konzole.Red();
+                            Console.WriteLine("Zkusil si no, teď ležíš s mokrou hubou vedle hospody.");
+                            PubBitka(zbran);
+                        }
+
+                        if (missCount == 3)
+                        {
+                            Console.Clear();
+                            konzole.Red();
+                            Console.WriteLine("Tak ty se už nebij kamo, umřel si");
+                        }
+                    }
+
+                } else
                 {
                     Console.Clear();
                     konzole.Red();
-                    Console.WriteLine("Zkusil si no, teď ležíš s mokrou hubou vedle hospody.");
-                    PubBitka();
+                    Console.WriteLine("Jak se ti to povedlo???");
+                    zbran = "Mec";
+                    PubBitka(zbran);
                 }
             } else
             {
                 Console.Clear();
                 konzole.Red();
                 Console.WriteLine("Bohužel, jeho ruka není chléb. Zkus to znova");
-                PubBitka();
+                PubBitka(zbran);
             }
             return specialniItem;
         }
