@@ -83,6 +83,18 @@ namespace RocnikovaHRA
                         else if (gameProgress.Score == 20)
                         {
                             soubor.NacteniProgressu(gameProgress.Score);
+                        } else if (gameProgress.Score == 30)
+                        {
+                            soubor.NacteniProgressu(gameProgress.Score);
+                        } else if (gameProgress.Score == 40)
+                        {
+                            soubor.NacteniProgressu(gameProgress.Score);
+                        } else if (gameProgress.Score == 50)
+                        {
+                            soubor.NacteniProgressu(gameProgress.Score);
+                        } else if (gameProgress.Score == 60)
+                        {
+                            soubor.NacteniProgressu(gameProgress.Score);
                         }
                         break;
                 }
