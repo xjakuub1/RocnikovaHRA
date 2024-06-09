@@ -193,6 +193,7 @@ namespace RocnikovaHRA
                         randomCislo = rnd.Next(1, 5);
                         if (randomCislo <= 3)
                         {
+                            Console.Clear();
                             konzole.Kurator();
                             Console.WriteLine("Uhl si úspěšně a pobodal si ho 43x");
                             Console.WriteLine("Kurátor: Rozhodl ses prohledat ho a našel si u něj krvavej kříšťálovéj kámen, který sis ponechal.");
@@ -954,6 +955,7 @@ namespace RocnikovaHRA
                 Console.WriteLine("Marika: Abych řekla pravdu, myslela jsem si že to nedáš, ale jsi statečný");
                 konzole.Pokracuj();
 
+                Console.Clear();
                 Console.WriteLine("Odešel si s Marikou do pokoje a zbytek je historie");
                 Console.ReadKey(true);
                 Environment.Exit(0);
@@ -1074,6 +1076,7 @@ namespace RocnikovaHRA
                 Console.WriteLine("Bloudník: Nojo, měl si mi pomoct - teď si za to zaplatil");
                 konzole.Pokracuj();
 
+                Console.Clear();
                 konzole.Red();
                 Console.WriteLine("Bloudník odešel se sudy a tebe nikdo nikdy nenašel");
                 Console.WriteLine("Marika si řekla že ses na to vybod a zrhl si jako srab");
