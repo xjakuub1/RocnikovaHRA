@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Azeroth.cs" />
+    <Compile Include="Enemy.cs" />
     <Compile Include="Konzole.cs" />
     <Compile Include="Postava.cs" />
     <Compile Include="PraceSeSouborem.cs" />

@@ -15,6 +15,8 @@ namespace RocnikovaHRA
         static void Main(string[] args)
         {
             Postava postava = new Postava();
+            Postava pomocnik = new Postava();
+            Enemy zombie = new Enemy();
             Azeroth svet = new Azeroth();
             PraceSeSouborem soubor = new PraceSeSouborem();
             Konzole konzole = new Konzole();
@@ -33,71 +35,54 @@ namespace RocnikovaHRA
                     case "1":
                         Console.Clear();
                         postava.name = postava.pojmenujPostavu();
-                        soubor.ZapisBodu("progress.txt", 10, postava.name);
+                        zombie.zivoty = 15;
+                        soubor.ZapisBodu(10, postava.name, postava.zivoty);
                         svet.Intro(postava.name);
                         postava.zbran = svet.vyberZbrane();
-                        soubor.ZapisBodu("progress.txt", 20, postava.name, postava.zbran);
+                        soubor.ZapisBodu(20, postava.name, postava.zivoty, postava.zbran);
                         postava.Sila(postava.zbran);
                         konzole.Pokracuj();
                         int cesta = svet.Pub();
                         if (cesta == 1) 
                         {
                             postava.specialniItem = svet.PubBitka(postava.zbran);
-                            soubor.ZapisBodu("progress.txt", 30, postava.name, postava.zbran, postava.specialniItem);
+                            soubor.ZapisBodu(30, postava.name, postava.zivoty, postava.zbran, postava.specialniItem);
                         } else if (cesta == 2)
                         {
                             postava.specialniItem = "Nic";
                             svet.PubBezKonfrontace();
-                            soubor.ZapisBodu("progress.txt", 30, postava.name, postava.zbran, postava.specialniItem);
+                            soubor.ZapisBodu(30, postava.name, postava.zivoty, postava.zbran, postava.specialniItem);
+                        }
+                        svet.PubUvnitr();
+                        soubor.ZapisBodu(40, postava.name, postava.zivoty, postava.zbran, postava.specialniItem);
+                        postava.zivoty = svet.Mise1(postava.sila, postava.zivoty, zombie.zivoty);
+                        soubor.ZapisBodu(50, postava.name, postava.zivoty, postava.zbran, postava.specialniItem);
+                        postava.pomocnik = svet.Kompadre();
+                        postava.zivoty = 100;
+                        pomocnik.zivoty = 100;
+                        soubor.ZapisBodu(60, postava.name, postava.zivoty, postava.zbran, postava.specialniItem, postava.pomocnik);
+                        if (postava.pomocnik == "Ano") 
+                        {
+                            svet.BossFight(postava.sila, postava.pomocnik, postava.zivoty, pomocnik.zivoty, postava.specialniItem);
+                        } else
+                        {
+                            svet.BossFightBezPomocnika(postava.sila, postava.zivoty, postava.specialniItem);
                         }
                         Console.ReadKey();
                         break;
                     case "2":
-                        // Save a exit
+                        Environment.Exit(0);
                         return;
                     case "3":
                         GameProgress gameProgress = soubor.NacteniHry("progress.txt");
-                        int score = gameProgress.Score;
-                        string jmeno = gameProgress.Jmeno;
-                        string zbran = gameProgress.Zbran;
-                        string specialItem = gameProgress.SpecialniItem;
 
                         if (gameProgress.Score == 10)
                         {
-                            svet.Intro(jmeno);
-                            postava.zbran = svet.vyberZbrane();
-                            soubor.ZapisBodu("progress.txt", 20, jmeno, zbran);
-                            postava.Sila(zbran);
-                            konzole.Pokracuj();
-                            int cesta1 = svet.Pub();
-                            if (cesta1 == 1)
-                            {
-                                postava.specialniItem = svet.PubBitka(zbran);
-                                soubor.ZapisBodu("progress.txt", 30, jmeno, zbran, postava.specialniItem);
-                            }
-                            else if (cesta1 == 2)
-                            {
-                                postava.specialniItem = "Nic";
-                                svet.PubBezKonfrontace();
-                                soubor.ZapisBodu("progress.txt", 30, jmeno, zbran, postava.specialniItem);
-                            }
+                            soubor.NacteniProgressu(gameProgress.Score);
                         }
                         else if (gameProgress.Score == 20)
                         {
-                            postava.Sila(zbran);
-                            konzole.Pokracuj();
-                            int cesta2 = svet.Pub();
-                            if (cesta2 == 1)
-                            {
-                                postava.specialniItem = svet.PubBitka(zbran);
-                                soubor.ZapisBodu("progress.txt", 30, jmeno, zbran, postava.specialniItem);
-                            }
-                            else if (cesta2 == 2)
-                            {
-                                postava.specialniItem = "Nic";
-                                svet.PubBezKonfrontace();
-                                soubor.ZapisBodu("progress.txt", 30, jmeno, zbran, postava.specialniItem);
-                            }
+                            soubor.NacteniProgressu(gameProgress.Score);
                         }
                         break;
                 }

@@ -13,6 +13,8 @@ namespace RocnikovaHRA
         public string zbran = "";
         public string specialniItem = "";
         public int sila;
+        public int zivoty = 50;
+        public string pomocnik = "Ne";
 
         PraceSeSouborem soubor = new PraceSeSouborem();
         Konzole konzole = new Konzole();
@@ -92,7 +94,7 @@ namespace RocnikovaHRA
                 case "Mec":
                     sila = 15;
                     konzole.Red();
-                    Console.WriteLine("Dostal si podel, máš sílu jen 15. romálů");
+                    Console.WriteLine("Dostal si poděl, máš sílu jen 15. romálů");
                     break;
                 default:
                     sila = 10;
